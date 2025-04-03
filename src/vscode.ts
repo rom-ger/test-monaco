@@ -1,5 +1,4 @@
 import * as monaco from 'monaco-editor';
-import { initServices } from 'monaco-languageclient/vscode/services';
 import { config } from './config';
 
 export type MonacoEditorUserConfig = typeof config;
@@ -22,17 +21,4 @@ export const checkServiceConsistency = (userServices?: monaco.editor.IEditorOver
 
     // we end up here if no exceptions were thrown
     return true;
-};
-
-
-export const initVScodeServices = async (args: {
-    userConfig: MonacoEditorUserConfig;
-}) => {
-    const { userConfig } = args;
-
-    await initServices({
-        serviceConfig: userConfig.wrapperConfig.serviceConfig,
-        caller: `monaco-editor (${userConfig.id})`,
-        performChecks: checkServiceConsistency
-    });
 };
